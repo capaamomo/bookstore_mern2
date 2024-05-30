@@ -43,7 +43,7 @@ const CreateBook = () => {
     setTimeout(() => {
       setloading(false);
       navigate('/')
-    }, 1000);
+    }, 2000);
   };
 
 
