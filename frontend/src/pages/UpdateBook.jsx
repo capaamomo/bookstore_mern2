@@ -10,14 +10,14 @@ const UpdateBook = () => {
   const [PublishYear, setpublishyear] = useState('');
   const [loading, setloading] = useState(false);
   const navigate = useNavigate();
-  const {id} = useParams();
+  const { id } = useParams();
   useEffect(()=>{
     setloading(true);
     axios.get(`http://localhost:5555/books/${id}`)
     .then((response)=>{
-      setauthor(response.data.author);
-      setpublishyear(response.data.PublishYear);
-      settitle(response.data.title);
+      setauthor(response.data.book.author);
+      setpublishyear(response.data.book.PublishYear);
+      settitle(response.data.book.title);
       setloading(false);
     }).catch((error)=>{
       setloading(false);

@@ -27,7 +27,7 @@ const CreateBook = () => {
       setloading(false);
       alert('error');
       console.log(error);
-    })
+    });
   };
   return (
     <div className='p-4'>
