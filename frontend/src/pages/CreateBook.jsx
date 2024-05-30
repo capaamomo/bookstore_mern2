@@ -18,7 +18,7 @@ const CreateBook = () => {
     };
     setloading(true);
     axios
-    .post('http://https://bookstore-mern2-backend.vercel.app/books', data)
+    .post('https://bookstore-mern2-backend.vercel.app/books', data)
     .then(() => {
       setloading(false);
       navigate('/');

@@ -13,7 +13,7 @@ const UpdateBook = () => {
   const { id } = useParams();
   useEffect(()=>{
     setloading(true);
-    axios.get(`https://bookstore-mern2-backend.vercel.app//books/${id}`)
+    axios.get(`https://bookstore-mern2-backend.vercel.app/books/${id}`)
     .then((response)=>{
       setauthor(response.data.book.author);
       setpublishyear(response.data.book.PublishYear);
