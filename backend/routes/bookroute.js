@@ -16,9 +16,8 @@ router.post('/', async (request,response) => {
             author: request.body.author,
             PublishYear: request.body.PublishYear,
         };
-
-        const book  = await Book.create(newbook);
-        return book;
+        Book.create(newbook);
+        return response.status(200).send('book created');
     }catch (error) {
         console.log(error.message);
         response.status(500).send({message: error.message});

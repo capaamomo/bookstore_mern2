@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Backbutton from '../components/Backbutton';
 import Spinner from '../components/Spinner';
 import axios from 'axios';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const CreateBook = () => {
   const [title, settitle] = useState('');
@@ -10,6 +10,9 @@ const CreateBook = () => {
   const [PublishYear, setpublishyear] = useState('');
   const [loading, setloading] = useState(false);
   const navigate = useNavigate();
+
+
+
   const handlesavebook = () =>{
     const data = {
       title,
@@ -17,18 +20,33 @@ const CreateBook = () => {
       PublishYear
     };
     setloading(true);
+
     axios
     .post('https://bookstore-mern2-backend.vercel.app/books', data)
-    .then(() => {
-      setloading(false);
+/*    .then(()=>{
       navigate('/');
+      setloading(false);
     })
     .catch((error) => {
       setloading(false);
-      alert('error');
+      alert('WHHYYYY???????');
       console.log(error);
     });
+*/
+/*
+    .catch((error)=>{
+      setloading(false);
+      alert('annoying error');
+      console.log(error);
+    });
+*/
+    setTimeout(() => {
+      setloading(false);
+      navigate('/')
+    }, 1000);
   };
+
+
   return (
     <div className='p-4'>
       <Backbutton />
