@@ -27,6 +27,10 @@ const UpdateBook = () => {
   },[id])
 
   const handleeditbook = () =>{
+    if(!title || !author || !PublishYear || isNaN(PublishYear)){
+      alert('There was a problem updating entry');
+      return;
+    }
     const data = {
       title,
       author,
@@ -41,7 +45,7 @@ const UpdateBook = () => {
     })
     .catch((error) => {
       setloading(false);
-      alert('error updating');
+      alert('Could not update selected entry ');
       console.log(error);
     });
   };

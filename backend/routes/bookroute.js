@@ -6,21 +6,22 @@ const router = express.Router();
 router.post('/', async (request,response) => {
     try{
         if(
-            !request.body.title || !request.body.author || !request.body.PublishYear
+            !request.body.title || !request.body.author || !request.body.PublishYear || isNaN(request.body.PublishYear)
         ){
-            return response.status(500).send({message: 'send all fields'});
+            return response.status(500).send({message: 'invalid input'});
         }
-
         const newbook = {
             title: request.body.title,
             author: request.body.author,
             PublishYear: request.body.PublishYear,
         };
-        Book.create(newbook);
-        return response.status(200).send('book created');
+
+        await Book.create(newbook);
+
+        return response.status(200).send('Book created');
     }catch (error) {
         console.log(error.message);
-        response.status(500).send({message: error.message});
+        response.status(422).send({message: error.message});
     }
 });
 
@@ -46,7 +47,7 @@ router.get('/:id', async (request,response) =>{
         const book = await Book.findById(id);
 
         if(!book){
-            return response.status(404).json({message: 'book not found'});
+            return response.status(404).json({message: 'Book not found'});
         }
         response.status(200).json({
             book            
@@ -61,21 +62,22 @@ router.get('/:id', async (request,response) =>{
 router.put('/:id', async (request,response) =>{
     try{
         if(!request.body.title || !request.body.author || !request.body.PublishYear){
-            response.status(500).send('give all details');
+            return response.status(500).send({message:'Some fields are missing'});
         }
+
         const {id} = request.params;
         const book = await Book.findByIdAndUpdate(id, request.body);
 
         if(!book){
             return response.status(404).json({
-                message: 'book not found'
+                message: 'Book not found'
             })
         }
 
         const booktodisplay = await Book.findById(id);
 
         return response.status(200).json({
-            message: 'book updated new entry:',
+            message: 'Book updated new entry:',
             booktodisplay
         })
     }catch (error){
@@ -90,9 +92,9 @@ router.delete('/:id', async (request,response) =>{
         const { id } = request.params;
         const removed = await Book.findByIdAndDelete(id);
         if(!removed){
-            return response.status(404).json({message: 'book not found'});
+            return response.status(404).json({message: 'Book not found'});
         }
-        return response.status(200).json({message: 'book deleted'});
+        return response.status(200).json({message: 'Book deleted'});
     }catch (error) {
         console.log(error.message);
         response.status(500).send({message: error.message});

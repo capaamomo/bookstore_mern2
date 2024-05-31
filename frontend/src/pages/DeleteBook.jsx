@@ -19,6 +19,7 @@ const DeleteBook = () => {
     })
     .catch((error)=>{
       alert('error');
+      console.log(error);
       setloading(false);
     });
   };

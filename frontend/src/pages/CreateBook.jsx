@@ -23,27 +23,15 @@ const CreateBook = () => {
 
     axios
     .post('https://bookstore-mern2-backend.vercel.app/books', data)
-/*    .then(()=>{
+    .then(()=>{
       navigate('/');
       setloading(false);
     })
     .catch((error) => {
       setloading(false);
-      alert('WHHYYYY???????');
+      alert('There was a problem creating new book');
       console.log(error);
     });
-*/
-/*
-    .catch((error)=>{
-      setloading(false);
-      alert('annoying error');
-      console.log(error);
-    });
-*/
-    setTimeout(() => {
-      setloading(false);
-      navigate('/')
-    }, 2000);
   };
 
 
